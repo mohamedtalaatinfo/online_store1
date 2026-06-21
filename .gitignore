@@ -1,0 +1,43 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+.venv/
+.myvenv/
+
+# dotenv
+.env.local
+.env.production
+.env.*
+
+# Environment variables / secrets
+.env
+
+# Django
+db.sqlite3
+*.log
+media/
+
+# Static files (optional if you collect them)
+staticfiles/
+
+# Migrations cache
+**/migrations/__pycache__/
+
+# Build / distribution
+build/
+dist/
+*.egg-info/
+
+# IDEs
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
