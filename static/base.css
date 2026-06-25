@@ -322,7 +322,6 @@ a:hover {
 /* ============================================
    PRODUCT CARDS
    ============================================ */
-
 .products-scroll {
   display: flex;
   gap: 24px;
@@ -332,40 +331,33 @@ a:hover {
   -ms-overflow-style: none;
   padding-bottom: 8px;
 }
-
 .products-scroll::-webkit-scrollbar {
   display: none;
 }
-
 .product-card {
   flex-shrink: 0;
   width: 280px;
   scroll-snap-align: start;
   padding: 24px;
 }
-
 .product-image-wrapper {
-  width: 232px;
-  height: 232px;
-  margin: 0 auto;
+  width: 100%;
+  height: 220px;
   overflow: hidden;
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 .product-image-wrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 300ms ease;
 }
-
 .product-card:hover .product-image-wrapper img {
   transform: scale(1.04);
 }
-
 .product-name {
   font-size: 18px;
   font-weight: 600;
@@ -375,7 +367,6 @@ a:hover {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
 .product-category {
   font-family: 'JetBrains Mono', monospace;
   font-size: 12px;
@@ -383,7 +374,6 @@ a:hover {
   color: var(--text-muted);
   margin-top: 4px;
 }
-
 .product-price {
   font-family: 'JetBrains Mono', monospace;
   font-size: 12px;
@@ -391,7 +381,6 @@ a:hover {
   color: var(--accent-warm);
   margin-top: 12px;
 }
-
 .btn-add-cart {
   width: 100%;
   padding: 12px;
@@ -405,12 +394,10 @@ a:hover {
   transition: border-color 200ms ease, background 200ms ease;
   border-radius: 8px;
 }
-
 .btn-add-cart:hover {
   border-color: rgba(255, 255, 255, 0.2);
   background: var(--surface);
 }
-
 /* ============================================
    CATEGORY SHOWCASE
    ============================================ */
@@ -421,16 +408,13 @@ a:hover {
 }
 
 .category-card {
-  position: relative;
-  border-radius: 20px;
+  min-height: 440px;
   overflow: hidden;
-  cursor: pointer;
+  border-radius: 14px;
+  position: relative;
 }
 
-.category-card-lg {
-  aspect-ratio: 16 / 9;
-}
-
+.category-card-lg,
 .category-card-sm {
   aspect-ratio: 4 / 3;
 }
@@ -439,9 +423,10 @@ a:hover {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 600ms ease;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
-
 .category-card:hover img {
   transform: scale(1.05);
 }

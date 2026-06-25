@@ -14,11 +14,9 @@
       
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto navbar-categories-list">
-          <li class="nav-item"><a class="nav-link nav-link-tech" href="category.html?cat=keyboards">Keyboards</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-tech" href="category.html?cat=mice">Mice</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-tech" href="category.html?cat=monitors">Monitors</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-tech" href="category.html?cat=laptops">Laptops</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-tech" href="category.html?cat=accessories">Accessories</a></li>
+          {% for cat in categories %}
+          <li class="nav-item"><a class="nav-link nav-link-tech" href="">{{ cat|title }}</a></li>
+          {% endfor %}
         </ul>
         
         <div class="d-flex align-items-center gap-3">

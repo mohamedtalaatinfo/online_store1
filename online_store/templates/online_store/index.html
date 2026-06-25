@@ -96,83 +96,39 @@
     </div>
   </section>
 
-  <!-- ============================================
-       BROWSE BY CATEGORY
-       ============================================ -->
-  <section class="section-padding" id="categories">
-    <div class="content-max">
-      <div class="section-header reveal">
-        <p class="overline mb-2">Browse by Category</p>
-        <h2 class="mb-0" style="font-size: 36px; font-weight: 600; letter-spacing: -0.02em;">Find What You Need</h2>
-      </div>
-      
-      <div class="row g-4">
-        <div class="col-lg-7 col-md-6 reveal reveal-delay-1">
-          <a href="category.html?cat=keyboards" class="text-decoration-none">
-            <div class="category-card category-card-lg">
-              <img src="{% static "online_store/images/cat-keyboards.jpg" %}" alt="Mechanical Keyboards">
-              <div class="category-overlay d-flex justify-content-between align-items-end">
-                <div>
-                  <div class="category-name">Keyboards</div>
-                  <div class="category-count">24 products</div>
-                </div>
-                <span class="category-arrow">&rarr;</span>
-              </div>
-            </div>
-          </a>
-        </div>
-        
-        <div class="col-lg-5 col-md-6 reveal reveal-delay-2">
-          <a href="category.html?cat=mice" class="text-decoration-none">
-            <div class="category-card category-card-sm">
-              <img src="{% static "online_store/images/cat-mice.jpg" %}" alt="Mechanical Keyboards">
-              
-              <div class="category-overlay d-flex justify-content-between align-items-end">
-                <div>
-                  <div class="category-name">Mice</div>
-                  <div class="category-count">18 products</div>
-                </div>
-                <span class="category-arrow">&rarr;</span>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-      
-      <div class="row g-4 mt-0">
-        <div class="col-lg-5 col-md-6 reveal reveal-delay-3">
-          <a href="category.html?cat=monitors" class="text-decoration-none">
-            <div class="category-card category-card-sm">
-              <img src="{% static "online_store/images/cat-monitors.jpg" %}" alt="Mechanical Keyboards">
-              <div class="category-overlay d-flex justify-content-between align-items-end">
-                <div>
-                  <div class="category-name">Monitors</div>
-                  <div class="category-count">12 products</div>
-                </div>
-                <span class="category-arrow">&rarr;</span>
-              </div>
-            </div>
-          </a>
-        </div>
-        
-        <div class="col-lg-7 col-md-6 reveal reveal-delay-4">
-          <a href="category.html?cat=laptops" class="text-decoration-none">
-            <div class="category-card category-card-lg">
-              <img src="{% static "online_store/images/cat-laptops.jpg" %}" alt="Mechanical Keyboards">
-              <div class="category-overlay d-flex justify-content-between align-items-end">
-                <div>
-                  <div class="category-name">Laptops</div>
-                  <div class="category-count">16 products</div>
-                </div>
-                <span class="category-arrow">&rarr;</span>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
+<!-- ============================================
+     BROWSE BY CATEGORY
+     ============================================ -->
+<section class="section-padding" id="categories">
+  <div class="content-max">
+    <div class="section-header reveal">
+      <p class="overline mb-2">Browse by Category</p>
+      <h2 class="mb-0" style="font-size: 36px; font-weight: 600; letter-spacing: -0.02em;">Find What You Need</h2>
     </div>
-  </section>
 
+    <div class="row g-4">
+      {% for cat in categories %}
+      <div class="col-lg-6 col-md-6 reveal">
+        <a href="?cat={{ cat.slug }}" class="text-decoration-none">
+          <div class="category-card">
+            <img src="{{ cat.image.url }}" alt="{{ cat.name }}">
+            <div class="category-overlay d-flex justify-content-between align-items-end">
+              <div>
+                <div class="category-name">{{ cat.name }}</div>
+                <div class="category-count">{{ cat.product_count }} products</div>
+              </div>
+              <span class="category-arrow">&rarr;</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% empty %}
+      <p class="text-muted">No categories found.</p>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
   <!-- ============================================
        NEW ARRIVALS BANNER (replaced Custom Builds)
        ============================================ -->

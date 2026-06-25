@@ -23,11 +23,9 @@
       <div class="row">
         <div class="col-6 col-md-3 mb-4 mb-md-0">
           <div class="footer-column-header">Shop</div>
-          <a href="category.html?cat=keyboards" class="footer-link">Keyboards</a>
-          <a href="category.html?cat=mice" class="footer-link">Mice</a>
-          <a href="category.html?cat=monitors" class="footer-link">Monitors</a>
-          <a href="category.html?cat=laptops" class="footer-link">Laptops</a>
-          <a href="category.html?cat=accessories" class="footer-link">Accessories</a>
+          {% for cat in categories %}
+          <a href="" class="footer-link">{{ cat|title }}</a>
+          {% endfor %}
         </div>
         <div class="col-6 col-md-3 mb-4 mb-md-0">
           <div class="footer-column-header">Support</div>
