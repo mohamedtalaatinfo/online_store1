@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
 
-
+    # My Apps Configuration
     'online_store.apps.OnlineStoreConfig',
     'accounts.apps.AccountsConfig',
 ]
@@ -78,6 +78,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # My context_processors 
+                'online_store.context_processors.global_site_data',
             ],
         },
     },

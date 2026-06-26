@@ -7,11 +7,9 @@ from .models import *
 
 class IndexView(View):
     def get(self, request):
-        categories = CategoryModel.objects.all()
         featured = ItemsModel.objects.filter(is_featured=True)
         context = {
-            "categories" : categories,
-            "featured": featured
+            "featured": featured,
         }
         return render(request, "online_store/index.html", context)
 
