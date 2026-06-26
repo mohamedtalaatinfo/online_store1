@@ -24,7 +24,7 @@
         <div class="col-6 col-md-3 mb-4 mb-md-0">
           <div class="footer-column-header">Shop</div>
           {% for cat in categories %}
-          <a href="" class="footer-link">{{ cat|title }}</a>
+          <a href="{% url "category"  cat.slug  %}" class="footer-link">{{ cat|title }}</a>
           {% endfor %}
         </div>
         <div class="col-6 col-md-3 mb-4 mb-md-0">

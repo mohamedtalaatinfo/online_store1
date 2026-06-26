@@ -26,7 +26,7 @@ class ItemsModel(models.Model):
     item_name = models.CharField(max_length=100, unique=True)
     description = models.TextField(max_length=1000)
     image = models.ImageField(upload_to="uploads/items/")
-    is_available = models.BooleanField(default=False)
+    is_available = models.BooleanField(default=True)
     price = models.IntegerField(
         validators = [
             MinValueValidator(1),
@@ -36,6 +36,7 @@ class ItemsModel(models.Model):
     slug = models.SlugField(unique=True, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    is_featured = models.BooleanField(default=False)
 
 
     def __str__(self):

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-
+{% load humanize %}
 
 {% block page_title %}{% endblock page_title %}
 
@@ -40,57 +40,25 @@
       </div>
       
       <div class="products-grid">
+
+        {% for card in featured %}
         <!-- Product 1 -->
         <div class="glass-card product-card reveal reveal-delay-1">
           <a href="product.html?id=1" class="text-decoration-none">
             <div class="product-image-wrapper">
-              <img src="{% static "online_store/images/prod-1.jpg" %}" alt="Keychron Q1 Pro">
+              <img src="{{ card.image.url}}" alt="Keychron Q1 Pro">
             </div>
           </a>
-          <div class="product-name">Keychron Q1 Pro</div>
-          <div class="product-category">Mechanical Keyboards</div>
-          <div class="product-price">$199.00</div>
+          <div class="product-name"> {{ card.item_name|title }} </div>
+          <div class="product-category">{{ card.category.name|title }}</div>
+          <div class="product-price">EGP {{ card.price|intcomma }}</div>
           <button class="btn-add-cart" data-id="1" data-name="Keychron Q1 Pro" data-category="Mechanical Keyboards" data-price="199" data-image="images/prod-1.jpg">Add to Cart</button>
         </div>
         
-        <!-- Product 2 -->
-        <div class="glass-card product-card reveal reveal-delay-2">
-          <a href="product.html?id=2" class="text-decoration-none">
-            <div class="product-image-wrapper">
-              <img src="{% static "online_store/images/prod-2.jpg" %}" alt="Keychron Q1 Pro">
-            </div>
-          </a>
-          <div class="product-name">Logitech G Pro X Superlight</div>
-          <div class="product-category">Gaming Mice</div>
-          <div class="product-price">$149.00</div>
-          <button class="btn-add-cart" data-id="2" data-name="Logitech G Pro X Superlight" data-category="Gaming Mice" data-price="149" data-image="images/prod-2.jpg">Add to Cart</button>
-        </div>
+        {% empty %}
+        <p class="text-muted">No featured found.</p>
+        {% endfor %}
         
-        <!-- Product 3 -->
-        <div class="glass-card product-card reveal reveal-delay-3">
-          <a href="product.html?id=3" class="text-decoration-none">
-            <div class="product-image-wrapper">
-              <img src="{% static "online_store/images/prod-3.jpg" %}" alt="Keychron Q1 Pro">
-            </div>
-          </a>
-          <div class="product-name">LG UltraGear 27" 240Hz</div>
-          <div class="product-category">Monitors</div>
-          <div class="product-price">$449.00</div>
-          <button class="btn-add-cart" data-id="3" data-name="LG UltraGear 27 240Hz" data-category="Monitors" data-price="449" data-image="images/prod-3.jpg">Add to Cart</button>
-        </div>
-        
-        <!-- Product 4 -->
-        <div class="glass-card product-card reveal reveal-delay-4">
-          <a href="product.html?id=4" class="text-decoration-none">
-            <div class="product-image-wrapper">
-              <img src="{% static "online_store/images/prod-4.jpg" %}" alt="Keychron Q1 Pro">
-            </div>
-          </a>
-          <div class="product-name">MacBook Pro 14" M3</div>
-          <div class="product-category">Laptops</div>
-          <div class="product-price">$1,599.00</div>
-          <button class="btn-add-cart" data-id="4" data-name="MacBook Pro 14 M3" data-category="Laptops" data-price="1599" data-image="images/prod-4.jpg">Add to Cart</button>
-        </div>
         
       </div>
     </div>
@@ -109,13 +77,12 @@
     <div class="row g-4">
       {% for cat in categories %}
       <div class="col-lg-6 col-md-6 reveal">
-        <a href="?cat={{ cat.slug }}" class="text-decoration-none">
+        <a href="{% url "category"  cat.slug  %}" class="text-decoration-none">
           <div class="category-card">
             <img src="{{ cat.image.url }}" alt="{{ cat.name }}">
             <div class="category-overlay d-flex justify-content-between align-items-end">
               <div>
-                <div class="category-name">{{ cat.name }}</div>
-                <div class="category-count">{{ cat.product_count }} products</div>
+                <div class="category-name">{{ cat.name|title }}</div>
               </div>
               <span class="category-arrow">&rarr;</span>
             </div>
