@@ -1,77 +1,35 @@
-<!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product Details | Tech Haven</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
 
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-tech">
-    <div class="container-fluid content-max">
-      <a class="navbar-brand navbar-brand-tech" href="index.html">TECH HAVEN</a>
-      <button class="navbar-toggler navbar-toggler-tech" type="button" aria-label="Toggle navigation">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M4 12h16"/><path d="M4 18h16"/><path d="M4 6h16"/>
-        </svg>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mx-auto navbar-categories-list">
-          <li class="nav-item"><a class="nav-link nav-link-tech" href="index.html#keyboards">Keyboards</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-tech" href="index.html#mice">Mice</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-tech" href="index.html#monitors">Monitors</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-tech" href="index.html#laptops">Laptops</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-tech" href="index.html#accessories">Accessories</a></li>
-        </ul>
-        <div class="d-flex align-items-center gap-3">
-          <a href="cart.html" class="nav-icon position-relative" aria-label="Cart">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>
-            </svg>
-            <span class="cart-badge" style="display: none;">0</span>
-          </a>
-          <a href="login.html" class="nav-icon" aria-label="Account">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-    </div>
-  </nav>
+
+{% block page_title %} {{ item.item_name }} - {{ item.category.name }} {% endblock page_title %}
+
+{% block page_style %}
+
+{% endblock page_style %}
+
+
+{% block page_content %}
 
   <!-- Product Detail -->
   <section class="page-header-space section-padding">
     <div class="content-max">
       <!-- Breadcrumb -->
       <nav class="breadcrumb-tech mb-4">
-        <a href="index.html">Home</a> / <a href="index.html#keyboards">Keyboards</a> / <span>Keychron Q1 Pro</span>
+      <a href="{% url 'home' %}">Home</a> / <a href="{% url 'category' item.category %}">{{ item.category|title }}</a> / <span>{{ item }}</span>
       </nav>
       
       <div class="row">
         <!-- Image Gallery -->
         <div class="col-lg-7 reveal">
-          <img src="images/prod-1.jpg" alt="Keychron Q1 Pro" class="product-detail-image" id="main-product-image">
-          <div class="thumbnail-row">
-            <img src="images/prod-1.jpg" alt="View 1" class="thumbnail active">
-            <img src="images/prod-5.jpg" alt="View 2" class="thumbnail">
-            <img src="images/cat-keyboards.jpg" alt="View 3" class="thumbnail">
-            <img src="images/custom-keyboard.jpg" alt="View 4" class="thumbnail">
-          </div>
+        <img src=" {{ item.image.url }} " alt="{{ item.item_name }}" class="product-detail-image" id="main-product-image">
         </div>
         
         <!-- Product Info -->
         <div class="col-lg-5 ps-lg-5 mt-5 mt-lg-0 reveal reveal-delay-2">
-          <h1 class="product-detail-name">Keychron Q1 Pro</h1>
-          <div class="product-detail-price">$199.00</div>
+          <h1 class="product-detail-name"> {{ item.item_name }}</h1>
+          <div class="product-detail-price">EGP {{ item.price|intcomma  }}</div>
           <div class="stock-status">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" style="display: inline; margin-right: 4px;">
               <path d="M20 6L9 17l-5-5"/>
@@ -82,9 +40,7 @@
           <div class="divider-tech"></div>
           
           <p style="color: var(--text-secondary); line-height: 1.7;">
-            The Keychron Q1 Pro is a fully customizable mechanical keyboard with a CNC-machined aluminum body, 
-            hot-swappable switches, and QMK/VIA support. Features a 75% layout with a rotary encoder and 
-            gasket mount design for a premium typing experience.
+            {{ item.description }}
           </p>
           
           <ul class="specs-list mt-4">
@@ -93,7 +49,10 @@
             <li>Connectivity: Bluetooth 5.1 + USB-C</li>
             <li>Battery: 4000mAh</li>
           </ul>
-          
+         
+
+
+
           <div class="mt-4">
             <div class="quantity-selector">
               <button class="qty-btn" data-action="minus">-</button>
@@ -102,152 +61,46 @@
             </div>
           </div>
           
-          <button class="btn-add-cart-lg" id="btn-add-detail" 
+          <button class="btn-add-cart-lg fs-5" id="btn-add-detail" 
                   data-id="1" data-name="Keychron Q1 Pro" 
                   data-category="Mechanical Keyboards" data-price="199" data-image="images/prod-1.jpg">
             Add to Cart
           </button>
           
-          <span class="wishlist-link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display: inline; margin-right: 4px; vertical-align: middle;">
-              <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
-            </svg>
-            Add to Wishlist
-          </span>
         </div>
       </div>
-      
-      <!-- Related Products -->
-      <div class="mt-5 pt-5">
-        <div class="section-header reveal">
-          <h2 style="font-size: 36px; font-weight: 600; letter-spacing: -0.02em;">You Might Also Like</h2>
+ <!-- Related Products -->
+<div class="mt-5 pt-5">
+  <div class="section-header reveal">
+    <h2 style="font-size: 36px; font-weight: 600; letter-spacing: -0.02em;">You Might Also Like</h2>
+  </div>
+  <div class="products-grid">
+    {% for itm in items %}
+    <div class="glass-card product-card reveal">
+          <a href= "{% url 'item_details' itm.category.slug itm.slug %}" class="text-decoration-none">
+        <div class="product-image-wrapper">
+          <img src="{{ itm.image.url }}" alt="{{ itm.name }}">
         </div>
-        <div class="products-scroll">
-          <div class="glass-card product-card reveal reveal-delay-1">
-            <a href="product.html?id=5" class="text-decoration-none">
-              <div class="product-image-wrapper">
-                <img src="images/prod-5.jpg" alt="Razer BlackWidow V4 Pro">
-              </div>
-            </a>
-            <div class="product-name">Razer BlackWidow V4 Pro</div>
-            <div class="product-category">Mechanical Keyboards</div>
-            <div class="product-price">$229.00</div>
-            <button class="btn-add-cart" data-id="5" data-name="Razer BlackWidow V4 Pro" data-category="Mechanical Keyboards" data-price="229" data-image="images/prod-5.jpg">Add to Cart</button>
-          </div>
-          <div class="glass-card product-card reveal reveal-delay-2">
-            <a href="product.html?id=2" class="text-decoration-none">
-              <div class="product-image-wrapper">
-                <img src="images/prod-2.jpg" alt="Logitech G Pro X Superlight">
-              </div>
-            </a>
-            <div class="product-name">Logitech G Pro X Superlight</div>
-            <div class="product-category">Gaming Mice</div>
-            <div class="product-price">$149.00</div>
-            <button class="btn-add-cart" data-id="2" data-name="Logitech G Pro X Superlight" data-category="Gaming Mice" data-price="149" data-image="images/prod-2.jpg">Add to Cart</button>
-          </div>
-          <div class="glass-card product-card reveal reveal-delay-3">
-            <a href="product.html?id=6" class="text-decoration-none">
-              <div class="product-image-wrapper">
-                <img src="images/prod-6.jpg" alt="Glorious Model O Wireless">
-              </div>
-            </a>
-            <div class="product-name">Glorious Model O Wireless</div>
-            <div class="product-category">Gaming Mice</div>
-            <div class="product-price">$79.00</div>
-            <button class="btn-add-cart" data-id="6" data-name="Glorious Model O Wireless" data-category="Gaming Mice" data-price="79" data-image="images/prod-6.jpg">Add to Cart</button>
-          </div>
-          <div class="glass-card product-card reveal reveal-delay-4">
-            <a href="product.html?id=3" class="text-decoration-none">
-              <div class="product-image-wrapper">
-                <img src="images/prod-3.jpg" alt="LG UltraGear 27 240Hz">
-              </div>
-            </a>
-            <div class="product-name">LG UltraGear 27" 240Hz</div>
-            <div class="product-category">Monitors</div>
-            <div class="product-price">$449.00</div>
-            <button class="btn-add-cart" data-id="3" data-name="LG UltraGear 27 240Hz" data-category="Monitors" data-price="449" data-image="images/prod-3.jpg">Add to Cart</button>
-          </div>
-        </div>
-      </div>
+      </a>
+      <div class="product-name">{{ itm.item_name }}</div>
+      <div class="product-category">{{ itm.category.name|title }}</div>
+      <div class="product-price fs-5 fw-bolder">EGP {{ itm.price|intcomma }}</div>
+      <button class="btn-add-cart"
+        data-id="{{ itm.id }}">Add to Cart</button>
+    </div>
+    {% empty %}
+    <p class="text-muted">No related products found.</p>
+    {% endfor %}
+  </div>
+</div>     
+
+
+
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="footer-tech">
-    <div class="content-max">
-      <div class="row align-items-start justify-content-between">
-        <div class="col-lg-4 mb-4 mb-lg-0">
-          <div class="footer-brand">TECH HAVEN</div>
-          <p class="footer-tagline">Premium tech, delivered.</p>
-        </div>
-        <div class="col-lg-5">
-          <p class="footer-tagline mb-2">Subscribe for restock alerts and new drops.</p>
-          <div class="d-flex flex-wrap">
-            <input type="email" class="footer-input" placeholder="your@email.com">
-            <button class="btn-footer mt-2 mt-sm-0">Subscribe</button>
-          </div>
-        </div>
-      </div>
-      <div class="footer-divider"></div>
-      <div class="row">
-        <div class="col-6 col-md-3 mb-4 mb-md-0">
-          <div class="footer-column-header">Shop</div>
-          <a href="#" class="footer-link">Keyboards</a>
-          <a href="#" class="footer-link">Mice</a>
-          <a href="#" class="footer-link">Monitors</a>
-          <a href="#" class="footer-link">Laptops</a>
-          <a href="#" class="footer-link">Accessories</a>
-          <a href="#" class="footer-link">Custom Builds</a>
-        </div>
-        <div class="col-6 col-md-3 mb-4 mb-md-0">
-          <div class="footer-column-header">Support</div>
-          <a href="#" class="footer-link">Shipping Info</a>
-          <a href="#" class="footer-link">Returns</a>
-          <a href="#" class="footer-link">FAQ</a>
-          <a href="#" class="footer-link">Contact Us</a>
-          <a href="#" class="footer-link">Warranty</a>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="footer-column-header">Company</div>
-          <a href="#" class="footer-link">About</a>
-          <a href="#" class="footer-link">Careers</a>
-          <a href="#" class="footer-link">Blog</a>
-          <a href="#" class="footer-link">Press</a>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="footer-column-header">Legal</div>
-          <a href="#" class="footer-link">Privacy Policy</a>
-          <a href="#" class="footer-link">Terms of Service</a>
-          <a href="#" class="footer-link">Cookie Policy</a>
-        </div>
-      </div>
-      <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center">
-        <p class="footer-copyright mb-3 mb-md-0">&copy; 2025 Tech Haven. All rights reserved.</p>
-        <div class="d-flex gap-3">
-          <a href="#" class="footer-social-link" aria-label="GitHub">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
-              <path d="M9 18c-4.51 2-5-2-7-2"/>
-            </svg>
-          </a>
-          <a href="#" class="footer-social-link" aria-label="Twitter">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/>
-            </svg>
-          </a>
-          <a href="#" class="footer-social-link" aria-label="Instagram">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-    </div>
-  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/app.js"></script>
-</body>
-</html>
+
+{% endblock page_content %}

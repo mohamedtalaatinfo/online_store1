@@ -44,3 +44,16 @@ class AllProductsView(View):
         return render(request, "online_store/category.html", context)
 
 
+class ItemDetailsView(View):
+
+    def get(self, request, cat_slug, item_slug):
+        item = get_object_or_404(ItemsModel, slug=item_slug, category__slug=cat_slug)
+        items = get_list_or_404(ItemsModel, category__slug=cat_slug)
+        context = {
+            "item": item,
+            "items": items,
+        }
+        return render(request, "online_store/product.html", context)
+
+
+

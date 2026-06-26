@@ -44,7 +44,7 @@
         {% for card in featured %}
         <!-- Product 1 -->
         <div class="glass-card product-card reveal reveal-delay-1">
-          <a href="product.html?id=1" class="text-decoration-none">
+          <a href="{% url 'item_details' card.category.slug card.slug %}"class="text-decoration-none">
             <div class="product-image-wrapper">
               <img src="{{ card.image.url}}" alt="Keychron Q1 Pro">
             </div>
