@@ -23,6 +23,7 @@
       <div class="row">
         <div class="col-6 col-md-3 mb-4 mb-md-0">
           <div class="footer-column-header">Shop</div>
+          <a href="{% url "allproducts"  %}" class="footer-link"> All Products </a>
           {% for cat in categories %}
           <a href="{% url "category"  cat.slug  %}" class="footer-link">{{ cat|title }}</a>
           {% endfor %}

@@ -14,6 +14,7 @@
       
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto navbar-categories-list">
+          <li class="nav-item"><a class="nav-link nav-link-tech" href="{% url "allproducts" %}">All Products</a></li>
           {% for cat in categories %}
           <li class="nav-item"><a class="nav-link nav-link-tech" href="{% url "category" cat.slug %}">{{ cat|title }}</a></li>
           {% endfor %}

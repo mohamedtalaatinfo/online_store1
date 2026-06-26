@@ -50,8 +50,17 @@
             </div>
           </a>
           <div class="product-name"> {{ card.item_name|title }} </div>
-          <div class="product-category">{{ card.category.name|title }}</div>
-          <div class="product-price">EGP {{ card.price|intcomma }}</div>
+          
+        {% if card.stock <= 3 %}
+        <div class="product-category text-warning">  {{ card.stock }} Pieces Left  </div>
+        {% elif card.stock <= 1 %}
+        <div class="product-category text-danger">  Last Piece  </div>
+        {% else %}
+        <div class="product-category"> {{ card.stock }} Pieces Left</div>
+        {% endif %}
+
+
+          <div class="product-price fs-5 fw-bolder">EGP {{ card.price|intcomma }}</div>
           <button class="btn-add-cart" data-id="1" data-name="Keychron Q1 Pro" data-category="Mechanical Keyboards" data-price="199" data-image="images/prod-1.jpg">Add to Cart</button>
         </div>
         

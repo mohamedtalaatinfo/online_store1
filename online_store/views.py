@@ -29,3 +29,18 @@ class CategoryView(View):
         return render(request, "online_store/category.html", context)
 
 
+class AllProductsView(View):
+    
+    def get(self, request):
+        all_products = get_list_or_404(ItemsModel, is_available=True)
+        items_count = len(all_products)
+
+        context = {
+            "items": all_products,
+            "items_count": items_count,
+            "catname": "All Products",
+        }
+
+        return render(request, "online_store/category.html", context)
+
+
