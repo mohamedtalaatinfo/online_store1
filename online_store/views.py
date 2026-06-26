@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from django.http import HttpResponse
 from django.views import View
 from .models import *
@@ -7,7 +7,8 @@ from .models import *
 
 class IndexView(View):
     def get(self, request):
-        featured = ItemsModel.objects.filter(is_featured=True)
+        featured = ItemsModel.objects.filter(is_featured=True, is_available=True)
+        #featured = get_object_or_404(ItemsModel, is_featured=True)
         context = {
             "featured": featured,
         }
@@ -16,8 +17,9 @@ class IndexView(View):
 
 class CategoryView(View):
     def get(self, request, slug):
-        items = ItemsModel.objects.all().filter(category__slug=slug, is_available=True)
-        items_count = items.count()
+        #items = ItemsModel.objects.all().filter(category__slug=slug, is_available=True)
+        items = get_list_or_404(ItemsModel, category__slug=slug, is_available=True)
+        items_count = len(items)
         catname = CategoryModel.objects.get(slug=slug).name
         context = {
             "items": items,
@@ -25,3 +27,5 @@ class CategoryView(View):
             "catname": catname,
         }
         return render(request, "online_store/category.html", context)
+
+

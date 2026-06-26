@@ -50,8 +50,17 @@
           </div>
         </a>
         <div class="product-name">{{ item.item_name }}</div>
-        <div class="product-category">{{ item.category.name }}</div>
-        <div class="product-price">EGP {{ item.price|intcomma }}</div>
+
+        {% if item.stock <= 3 %}
+        <div class="product-category text-warning">  {{ item.stock }} Pieces Left  </div>
+        {% elif item.stock <= 1 %}
+        <div class="product-category text-danger">  Last Piece  </div>
+        {% else %}
+        <div class="product-category"> {{ item.stock }} Pieces Left</div>
+        {% endif %}
+
+
+        <div class="product-price fs-5 fw-bolder">EGP {{ item.price|intcomma }}</div>
         <button class="btn-add-cart"
           data-id="{{ item.id }}"
           data-name="{{ item.name }}"
