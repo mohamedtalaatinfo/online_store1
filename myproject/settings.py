@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     # My Apps Configuration
     'online_store.apps.OnlineStoreConfig',
     'accounts.apps.AccountsConfig',
+    'cart.apps.CartConfig',
 ]
 
 MIDDLEWARE = [
